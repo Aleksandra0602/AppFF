@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:projekt1/sign_up_screen.dart';
 
 import 'log_in_screen.dart';
@@ -10,6 +13,12 @@ class FirstScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.clear_rounded),
+          onPressed: () {
+            SystemNavigator.pop();
+          },
+        ),
         backgroundColor: Colors.pink,
         title: const Text('AppFF'),
         centerTitle: true,

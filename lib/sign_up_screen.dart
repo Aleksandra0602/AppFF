@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projekt1/before_picture_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     'Black',
     'Two diffrent color'
   ];
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,96 +28,103 @@ class _SignUpScreenState extends State<SignUpScreen> {
         backgroundColor: Colors.pink,
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.all(20),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Login',
-                labelStyle: TextStyle(color: Colors.pink),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.pink)),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+                child: Image.asset(
+              'assets/images/AppFF.png',
+              height: 170,
+              width: 170,
+            )),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  icon: Icon(Icons.person),
+                  border: OutlineInputBorder(),
+                  labelText: 'Login *',
+                  labelStyle: TextStyle(color: Colors.pink),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.pink)),
+                ),
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return (value != null && value.contains('@'))
+                      ? 'Do not use the @ char.'
+                      : null;
+                },
               ),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(20),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'E-mail',
-                labelStyle: TextStyle(color: Colors.pink),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.pink)),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  icon: Icon(Icons.alternate_email_outlined),
+                  border: OutlineInputBorder(),
+                  labelText: 'E-mail *',
+                  labelStyle: TextStyle(color: Colors.pink),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.pink)),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: DropdownButtonFormField(
-              style: TextStyle(color: Colors.pink, fontSize: 16),
-              onChanged: (String? newValue) {
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: DropdownButtonFormField(
+                style: TextStyle(color: Colors.pink, fontSize: 16),
+                onChanged: (String? newValue) {
                   setState(() {
                     dropdownValue = newValue!;
                   });
                 },
-              items: eyes.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.pink)),
-                  labelStyle: TextStyle(color: Colors.black45)) ,
+                items: eyes.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                decoration: InputDecoration(
+                    icon: Icon(Icons.remove_red_eye_outlined),
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.pink)),
+                    labelStyle: TextStyle(color: Colors.black45)),
+              ),
             ),
-          ),
-          // Padding(
-          //   padding: const EdgeInsets.all(20.0),
-          //   child: FormField<String>(
-          //     builder: (FormFieldState<String> state) {
-          //       return InputDecorator(
-          //         decoration: InputDecoration(
-          //             border: OutlineInputBorder(),
-          //             focusedBorder: OutlineInputBorder(
-          //                 borderSide: BorderSide(color: Colors.pink)),
-          //             labelStyle: TextStyle(color: Colors.black45)),
-          //         child: DropdownButtonHideUnderline(
-          //           child: DropdownButton<String>(
-          //             elevation: 10,
-          //             style: TextStyle(color: Colors.pink, fontSize: 16),
-          //             value: dropdownValue,
-          //             onChanged: (String? newValue) {
-          //               setState(() {
-          //                 dropdownValue = newValue!;
-          //                 state.didChange(newValue);
-          //               });
-          //             },
-          //             items: eyes.map((String value) {
-          //               return DropdownMenuItem<String>(
-          //                 value: value,
-          //                 child: Text(value),
-          //               );
-          //             }).toList(),
-          //           ),
-          //         ),
-          //       );
-          //     },
-          //   ),
-          // ),
-        ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.grey,
-        child: const Icon(Icons.double_arrow, size: 30.0),
+            SizedBox(height: 40),
+            InkWell(
+              onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BeforePictureScreen()));
+              },
+              child: Container(
+                width: 200,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.double_arrow,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

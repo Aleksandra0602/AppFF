@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projekt1/result_screen.dart';
 import 'constants/dimensions.dart';
 import 'log_in_screen.dart';
 class AfterRegistration extends StatelessWidget {
@@ -18,7 +19,6 @@ class AfterRegistration extends StatelessWidget {
           children: <Widget>[
             const SizedBox(height: Dimensions.BIG_PADDING),
             Container(
-              // padding: EdgeInsets.all(35),
               child: const Text(
                 'You have been added to the application!',
                 style:  TextStyle(
@@ -47,10 +47,11 @@ class AfterRegistration extends StatelessWidget {
                       fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LogInScreen()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => LogInScreen()),
+                  // );
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ResultScreen()));
                 },
                 child: const Text('Log in!'),
               ),
