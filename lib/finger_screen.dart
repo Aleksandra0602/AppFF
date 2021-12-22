@@ -1,11 +1,53 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:projekt1/after_log_in.dart';
+import 'package:projekt1/result_screen.dart';
 import 'constants/dimensions.dart';
 
-class FingerScreen extends StatelessWidget {
+class FingerScreen extends StatefulWidget {
   const FingerScreen({Key? key}) : super(key: key);
+
+  @override
+  State<FingerScreen> createState() => _FingerScreenState();
+}
+
+class _FingerScreenState extends State<FingerScreen> {
+
+  LocalAuthentication authentication = LocalAuthentication();
+  // late bool _canCheck;
+  late List<BiometricType> biometrics;
+  String _authorized = "Not authorized";
+
+
+
+  Future <void> _checkFingerPrints() async {
+
+    bool auth = false;
+    try {
+     auth = await authentication.authenticateWithBiometrics(
+         localizedReason: 'Scan your fingerprint to authenticate',
+         // stickyAuth: true,
+         useErrorDialogs: true,
+         stickyAuth: false,
+     );
+    } on PlatformException catch (e){
+      print(e);
+    }
+
+    setState(() {
+      _authorized = auth ? 'Authorized' : 'Not authorized';
+    });
+    if(auth) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => ResultScreen())
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +59,11 @@ class FingerScreen extends StatelessWidget {
         ),
         body: Center(
           child: Column(
-
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget> [
-              Text("Finger prints",
+              const Text("Clik \"Check\" and scan your fingerprint",
               style: TextStyle(
-                  fontSize: 48,
+                  fontSize: 40,
                   fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.italic,
               ),
@@ -38,12 +79,17 @@ class FingerScreen extends StatelessWidget {
                 width: 200,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.pink,
+                  color: Colors.grey,
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: Center(
-                  child: Text("Check", style: TextStyle(color: Colors.white, fontSize: 25)),
+                  child: TextButton(
+                      onPressed: () {
+                        _checkFingerPrints();
+                      },
+                      child: Text("Check", style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold)),
                 ),
+              ),
               ),
             ],
           ),

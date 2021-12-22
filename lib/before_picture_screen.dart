@@ -1,15 +1,20 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart' as syspaths;
 import 'package:projekt1/after_registration.dart';
-
+import 'package:http/http.dart' as http;
 import 'finger_screen.dart';
 import 'package:image_picker/image_picker.dart';
 
 class BeforePictureScreen extends StatefulWidget {
-  const BeforePictureScreen({Key? key}) : super(key: key);
+  final String login;
+  final String mail;
+  final String eyes;
+  const BeforePictureScreen({Key? key, required this.login, required this.mail, required this.eyes}) : super(key: key);
 
   @override
   State<BeforePictureScreen> createState() => _BeforePictureScreenState();
@@ -17,6 +22,8 @@ class BeforePictureScreen extends StatefulWidget {
 
 class _BeforePictureScreenState extends State<BeforePictureScreen> {
   File? storedImage;
+  late File _pickedImage;
+
 
   Future <void> _takePicture() async {
     final picker = ImagePicker();
@@ -27,7 +34,30 @@ class _BeforePictureScreenState extends State<BeforePictureScreen> {
       setState(() {
         storedImage = File(imageFile!.path);
       });
+
+      final appDir = await syspaths.getApplicationDocumentsDirectory(); //zapis do pliku
+      final fileName  = path.basename(imageFile!.path);
+      final savedImage = await storedImage!.copy('${appDir.path}/$fileName');
     }
+    
+  Future<http.Response> registerUser() {
+    final byt =  File(storedImage!.path).readAsBytesSync();
+    return http.post(
+      //Uri.parse('http://10.0.2.2:6060/user'),
+      Uri.parse('http://130.61.242.176:6060/user'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'login': widget.login,
+        'mail': widget.mail,
+        'eyes' : widget.eyes,
+        'photo_base' : base64Encode(byt)
+      }),
+    );
+  }
+
+
 
     @override
     Widget build(BuildContext context) {
@@ -102,6 +132,8 @@ class _BeforePictureScreenState extends State<BeforePictureScreen> {
                         ),
                       ),
                       onPressed: () {
+                        print(registerUser());
+                        print("rejestracja : " + widget.login + " , " + widget.mail + " , " + widget.eyes);
                         Navigator.push(context, MaterialPageRoute(builder: (context) => AfterRegistration()));
                       },
                       child: Text('Send'),

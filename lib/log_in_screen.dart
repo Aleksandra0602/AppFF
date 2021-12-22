@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projekt1/after_log_in.dart';
 import 'package:projekt1/after_registration.dart';
 
 import 'before_picture_screen.dart';
@@ -49,7 +50,7 @@ class _LogInScreenState extends State<LogInScreen> {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => BeforePictureScreen()));
+                    MaterialPageRoute(builder: (context) => AfterLogIn()));
               },
               child: Container(
                 width: 200,

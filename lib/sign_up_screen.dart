@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:projekt1/before_picture_screen.dart';
+import 'package:http/http.dart' as http;
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -7,6 +10,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+
+
+
   String dropdownValue = 'Amber';
   var eyes = [
     'Amber',
@@ -19,6 +25,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     'Two diffrent color'
   ];
   final _formKey = GlobalKey<FormState>();
+  final _loginController = TextEditingController();
+  final _emailController= TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +49,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Padding(
               padding: EdgeInsets.all(10),
               child: TextFormField(
+                controller: _loginController,
                 decoration: InputDecoration(
                   icon: Icon(Icons.person),
                   border: OutlineInputBorder(),
@@ -61,6 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Padding(
               padding: EdgeInsets.all(10),
               child: TextFormField(
+                controller: _emailController,
                 decoration: InputDecoration(
                   icon: Icon(Icons.alternate_email_outlined),
                   border: OutlineInputBorder(),
@@ -106,7 +117,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => BeforePictureScreen()));
+                          builder: (context) => BeforePictureScreen(
+                            login: _loginController.text,
+                            mail: _emailController.text,
+                            eyes: dropdownValue
+                          )));
               },
               child: Container(
                 width: 200,
