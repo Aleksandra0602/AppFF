@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as syspaths;
-import 'package:projekt1/after_registration.dart';
+
 
 import 'finger_screen.dart';
 import 'package:image_picker/image_picker.dart';

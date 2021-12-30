@@ -1,4 +1,4 @@
-import 'dart:convert';
+// import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +6,9 @@ import 'package:flutter/painting.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as syspaths;
 import 'package:projekt1/after_registration.dart';
-import 'package:http/http.dart' as http;
-import 'finger_screen.dart';
+// import 'package:http/http.dart' as http;
+import 'package:projekt1/utils/api_utils.dart';
+// import 'finger_screen.dart';
 import 'package:image_picker/image_picker.dart';
 
 class BeforePictureScreen extends StatefulWidget {
@@ -40,22 +41,22 @@ class _BeforePictureScreenState extends State<BeforePictureScreen> {
       final savedImage = await storedImage!.copy('${appDir.path}/$fileName');
     }
     
-  Future<http.Response> registerUser() {
-    final byt =  File(storedImage!.path).readAsBytesSync();
-    return http.post(
-      //Uri.parse('http://10.0.2.2:6060/user'),
-      Uri.parse('http://130.61.242.176:6060/user'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'login': widget.login,
-        'mail': widget.mail,
-        'eyes' : widget.eyes,
-        'photo_base' : base64Encode(byt)
-      }),
-    );
-  }
+  // Future<http.Response> registerUser() {
+  //   final byt =  File(storedImage!.path).readAsBytesSync();
+  //   return http.post(
+  //     //Uri.parse('http://10.0.2.2:6060/user'),
+  //     Uri.parse('http://130.61.242.176:6060/user'),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json; charset=UTF-8',
+  //     },
+  //     body: jsonEncode(<String, String>{
+  //       'login': widget.login,
+  //       'mail': widget.mail,
+  //       'eyes' : widget.eyes,
+  //       'photo_base' : base64Encode(byt)
+  //     }),
+  //   );
+  // }
 
 
 
@@ -71,16 +72,14 @@ class _BeforePictureScreenState extends State<BeforePictureScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Container(
-                child: Text(
-                  'Please take a photo!',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
-                  ),
-                  textAlign: TextAlign.center,
+              const Text(
+                'Please take a photo!',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
                 ),
+                textAlign: TextAlign.center,
               ),
               Container(
                 width: 200,
@@ -109,7 +108,7 @@ class _BeforePictureScreenState extends State<BeforePictureScreen> {
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(24),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text("Check",
                           style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold)),
                     ),
@@ -126,17 +125,18 @@ class _BeforePictureScreenState extends State<BeforePictureScreen> {
                         minimumSize: Size.fromHeight(50) ,
                         primary: Colors.pink,
                         onPrimary: Colors.white,
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 22,
                         ),
                       ),
                       onPressed: () {
-                        print(registerUser());
+                        registerUser(storedImage, widget.login, widget.mail, widget.eyes);
+                        //print(registerUser());
                         print("rejestracja : " + widget.login + " , " + widget.mail + " , " + widget.eyes);
                         Navigator.push(context, MaterialPageRoute(builder: (context) => AfterRegistration()));
                       },
-                      child: Text('Send'),
+                      child: const Text('Send'),
                     ),
                   ),
                   visible: storedImage !=null ? true : false,

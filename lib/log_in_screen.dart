@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:projekt1/after_log_in.dart';
-import 'package:projekt1/after_registration.dart';
-
-import 'before_picture_screen.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({Key? key}) : super(key: key);
@@ -25,15 +22,13 @@ class _LogInScreenState extends State<LogInScreen> {
         child: Column(
           children: <Widget>[
             const SizedBox(height: 50),
-            Container(
-              child: Image.asset('assets/images/AppFF.png', height: 200, width: 200,),
-            ),
+            Image.asset('assets/images/AppFF.png', height: 200, width: 200,),
             const SizedBox(height: 20),
             Container(
-              margin: EdgeInsets.all(10) ,
-              padding: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10) ,
+              padding: const EdgeInsets.all(10),
               child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           icon: Icon(Icons.person),
                           labelText: 'Login *',
                           labelStyle: TextStyle(color: Colors.pink),
@@ -59,7 +54,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   color: Colors.grey,
                   borderRadius: BorderRadius.circular(24),
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                       "Check",
                       style: TextStyle(

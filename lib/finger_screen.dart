@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:projekt1/after_log_in.dart';
+import 'package:projekt1/constants/failure_login.dart';
 import 'package:projekt1/result_screen.dart';
 import 'constants/dimensions.dart';
 
@@ -44,6 +45,10 @@ class _FingerScreenState extends State<FingerScreen> {
     if(auth) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => ResultScreen())
+      );
+    } else {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => FailureLogin())
       );
     }
   }
