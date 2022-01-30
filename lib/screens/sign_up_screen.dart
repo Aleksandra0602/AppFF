@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:projekt1/before_picture_screen.dart';
+import 'package:projekt1/screens/before_picture_screen.dart';
 import 'package:http/http.dart' as http;
 
 class SignUpScreen extends StatefulWidget {

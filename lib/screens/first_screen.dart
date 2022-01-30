@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:projekt1/sign_up_screen.dart';
+import 'package:projekt1/screens/result_screen.dart';
+import 'package:projekt1/screens/sign_up_screen.dart';
 
 import 'log_in_screen.dart';
 
@@ -14,7 +15,7 @@ class FirstScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.clear_rounded),
+          icon: const Icon(Icons.clear_rounded),
           onPressed: () {
             SystemNavigator.pop();
           },
@@ -38,8 +39,8 @@ class FirstScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 primary: Colors.pink,
                 onPrimary: Colors.white,
-                minimumSize: Size.fromHeight(50),
-                maximumSize: Size.fromHeight(75),
+                minimumSize: const Size.fromHeight(50),
+                maximumSize: const Size.fromHeight(75),
                 textStyle: const TextStyle(
                     fontSize: 20, fontWeight: FontWeight.bold),
               ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projekt1/after_log_in.dart';
+import 'package:projekt1/screens/after_log_in.dart';
+import 'package:projekt1/screens/finger_screen.dart';
+import 'package:projekt1/utils/api_utils.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({Key? key}) : super(key: key);
@@ -9,6 +11,8 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
+
+  final _loginCheckController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +32,11 @@ class _LogInScreenState extends State<LogInScreen> {
               margin: const EdgeInsets.all(10) ,
               padding: const EdgeInsets.all(10),
               child: TextFormField(
+                controller: _loginCheckController,
                         decoration: const InputDecoration(
                           icon: Icon(Icons.person),
                           labelText: 'Login *',
+
                           labelStyle: TextStyle(color: Colors.pink),
                           border: OutlineInputBorder(),
                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.pink)),
@@ -45,7 +51,9 @@ class _LogInScreenState extends State<LogInScreen> {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AfterLogIn()));
+                    MaterialPageRoute(builder: (context) => FingerScreen(
+                      loginCheck: _loginCheckController.text,
+                    )));
               },
               child: Container(
                 width: 200,

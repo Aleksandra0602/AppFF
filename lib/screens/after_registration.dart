@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projekt1/result_screen.dart';
-import 'constants/dimensions.dart';
+import '../constants/dimensions.dart';
 import 'log_in_screen.dart';
 class AfterRegistration extends StatelessWidget {
   const AfterRegistration({Key? key}) : super(key: key);
@@ -41,17 +40,16 @@ class AfterRegistration extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.pink,
                   onPrimary: Colors.white,
-                  minimumSize: Size.fromHeight(50),
-                  maximumSize: Size.fromHeight(75),
+                  minimumSize: const Size.fromHeight(50),
+                  maximumSize: const Size.fromHeight(75),
                   textStyle: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => LogInScreen()),
-                  // );
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ResultScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LogInScreen()),
+                  );
                 },
                 child: const Text('Log in!'),
               ),

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as syspaths;
-import 'package:projekt1/after_registration.dart';
+import 'package:projekt1/screens/after_registration.dart';
 // import 'package:http/http.dart' as http;
 import 'package:projekt1/utils/api_utils.dart';
 // import 'finger_screen.dart';

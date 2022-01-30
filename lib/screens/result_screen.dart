@@ -1,21 +1,33 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'package:projekt1/models/login_response_model.dart';
 
 class ResultScreen extends StatefulWidget {
-  const ResultScreen({Key? key}) : super(key: key);
+ const ResultScreen({Key? key, required this.dataUser}) : super(key: key);
+ final LoginResponseModel dataUser;
 
   @override
   _ResultScreenState createState() => _ResultScreenState();
 }
 
 class _ResultScreenState extends State<ResultScreen> {
+  late Uint8List bytes;
+  @override
+  void initState() {
+    bytes = base64Decode(widget.dataUser.photoBase!);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: TextButton(
-          child: Text(
+          child: const Text(
               'Log out',
           style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Colors.white)),
           onPressed: () {
@@ -38,8 +50,11 @@ class _ResultScreenState extends State<ResultScreen> {
                 decoration: BoxDecoration(
                   border: Border.all(width: 2, color: Colors.black)
                 ),
+               // child: Image.memory(bytes),
+                child: Image.asset('assets/images/f00.jpg', fit: BoxFit.cover),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.all(25),
@@ -47,7 +62,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey)
                     ),
-                    child: Text(
+                    child: const Text(
                       'Login : ',
                       style: TextStyle(
                         fontSize: 20,
@@ -57,17 +72,34 @@ class _ResultScreenState extends State<ResultScreen> {
                       textAlign: TextAlign.left,
                     ),
                   ),
+                  Container(
+                    margin: const EdgeInsets.all(25),
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black54)
+                    ),
+                    child: Text(
+                      widget.dataUser.login!,
+
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.all(25),
+                    margin: const EdgeInsets.all(25),
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey)
                     ),
-                    child: Text(
+                    child: const Text(
                       'E-mail :',
                       style: TextStyle(
                         fontSize: 20,
@@ -76,12 +108,27 @@ class _ResultScreenState extends State<ResultScreen> {
                       ),
                       textAlign: TextAlign.left,
                     ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.all(25),
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black54)
+                    ),
+                    child: Text(
+                      widget.dataUser.mail!,
 
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.grey,
+                      ),
+                    ),
                   )
-
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.all(25),
@@ -89,7 +136,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey)
                     ),
-                    child: Text(
+                    child: const Text(
                       'Eyes color :',
                       style: TextStyle(
                         fontSize: 20,
@@ -98,9 +145,23 @@ class _ResultScreenState extends State<ResultScreen> {
                       ),
                       textAlign: TextAlign.left,
                     ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.all(25),
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black54)
+                    ),
+                    child: Text(
+                     widget.dataUser.eyes!,
 
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.grey,
+                      ),
+                    ),
                   )
-
                 ],
               ),
               Padding(
