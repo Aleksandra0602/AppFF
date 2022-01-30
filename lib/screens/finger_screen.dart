@@ -74,11 +74,9 @@ class _FingerScreenState extends State<FingerScreen> {
                 ),
                   textAlign: TextAlign.center,
                 ),
-                Container(
-                  child: Image.asset(
-                    'assets/images/finger.png',
-                    fit: BoxFit.cover,
-                  ),
+                Image.asset(
+                  'assets/images/finger.png',
+                  fit: BoxFit.cover,
                 ),
                 Container(
                   width: 200,
@@ -92,7 +90,7 @@ class _FingerScreenState extends State<FingerScreen> {
                         onPressed: () {
                           _checkFingerPrints();
                         },
-                        child: Text("Check", style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold)),
+                        child: const Text("Check", style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold)),
                   ),
                 ),
                 ),
