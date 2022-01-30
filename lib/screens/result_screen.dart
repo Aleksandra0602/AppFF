@@ -50,8 +50,7 @@ class _ResultScreenState extends State<ResultScreen> {
                 decoration: BoxDecoration(
                   border: Border.all(width: 2, color: Colors.black)
                 ),
-               // child: Image.memory(bytes),
-                child: Image.asset('assets/images/f00.jpg', fit: BoxFit.cover),
+                child: Image.memory(bytes),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

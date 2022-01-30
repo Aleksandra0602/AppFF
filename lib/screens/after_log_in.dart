@@ -52,16 +52,14 @@ class _AfterLogIn extends State<AfterLogIn> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Container(
-              child: Text(
-                'Please take a photo!',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
-                ),
-                textAlign: TextAlign.center,
+            Text(
+              'Please take a photo!',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
               ),
+              textAlign: TextAlign.center,
             ),
             Container(
               width: 200,
@@ -108,7 +106,7 @@ class _AfterLogIn extends State<AfterLogIn> {
                     minimumSize: Size.fromHeight(50),
                     primary: Colors.pink,
                     onPrimary: Colors.white,
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22,
                     ),
